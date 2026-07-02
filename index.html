@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Pickers | Quality Selections</title>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Modern CSS Variables based on the Top Pickers Logo Colors */
+        :root {
+            --bg-dark: #07162c;
+            --bg-card: #0c2346;
+            --accent-blue: #00d2ff;
+            --accent-gold: #d4af37;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background-color: rgba(7, 22, 44, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent-gold);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-gold);
+            object-fit: cover;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        .logo-text p {
+            font-size: 0.75rem;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 1.2rem;
+        }
+
+        .nav-icons i {
+            cursor: pointer;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .nav-icons i:hover {
+            color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        /* --- HERO BANNER (ATTRACTIVE ENTRANCE) --- */
+        .hero {
+            background: linear-gradient(rgba(7, 22, 44, 0.8), rgba(7, 22, 44, 0.9)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            border-bottom: 3px solid var(--accent-blue);
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .hero h2 span {
+            color: var(--accent-blue);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            color: var(--text-gray);
+        }
+
+        .cta-btn {
+            background: linear-gradient(45deg, var(--accent-gold), #b38f1d);
+            color: #000;
+            padding: 12px 35px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6);
+            background: linear-gradient(45deg, var(--accent-blue), #0099bc);
+            color: #fff;
+        }
+
+        /* --- MAIN LAYOUT CONTAINER --- */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            display: inline-block;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent-gold);
+            letter-spacing: 1px;
+        }
+
+        /* --- PRODUCT GRID SYSTEM --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .card:hover img {
+            transform: scale(1.08);
+        }
+
+        .tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--accent-blue);
+            color: #000;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .tag.new {
+            background-color: var(--accent-gold);
+        }
+
+        .card-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        .card-info p {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .price-buy {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+
+        .buy-btn {
+            background-color: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .buy-btn:hover {
+            background-color: var(--accent-gold);
+            color: #000;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #040d1a;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-top: 10px;
+        }
+
+        /* --- RESPONSIVE FIXES --- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header>
+        <div class="navbar">
+            <div class="logo-area">
+                <!-- Verbatim file path added directly into the image tag source below -->
+                <img src="Gemini_Generated_Image_fyxnm8fyxnm8fyxn.png" alt="Top Pickers Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>TOP PICKERS</h1>
+                    <p>Quality Selections</p>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#new-arrivals">New Arrivals</a></li>
+                <li><a href="#clothing">Clothing</a></li>
+                <li><a href="#accessories">Accessories</a></li>
+                <li><a href="#beauty">Beauty</a></li>
+                <li><a href="#appliances">Home & Kitchen</a></li>
+            </ul>
+            <div class="nav-icons">
+                <i class="fas fa-search" title="Search"></i>
+                <i class="fas fa-shopping-bag" title="Cart"></i>
+                <i class="fas fa-user" title="Account"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO BANNER -->
+    <section class="hero">
+        <h2>Welcome to <span>Top Pickers</span></h2>
+        <p>Explore premium apparel, stunning beauty essentials, high-end accessories, and smart home appliances picked perfectly for your lifestyle.</p>
+        <a href="#new-arrivals" class="cta-btn">Shop New Arrivals</a>
+    </section>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+
+        <!-- SECTION 1: NEW ARRIVALS -->
+        <section id="new-arrivals" class="section-title">
+            <h2>✨ New Arrivals</h2>
+        </section>
+        <div class="grid">
+            <!-- Item 1: Men's Premium Kurta -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <span class="tag new">New</span>
+                    <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=400&q=80" alt="Men's Kurta">
+                </div>
+                <div class="card-info">
+                    <h3>Royal Designer Kurta</h3>
+                    <p>Traditional Shalwar & Kurta suite in rich midnight blue.</p>
+                    <div class="price-buy">
+                        <span class="price">$45.00</span>
+                        <button class="buy-btn">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2: Premium Leather Purse -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <span class="tag new">Hot</span>
+                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80" alt="Luxury Purse">
+                </div>
+                <div class="card-info">
+                    <h3>Luxury Leather Handbag</h3>
+                    <p>Elegant design for girls with secure gold-tone clasps.</p>
+                    <div class="price-buy">
+                        <span class="price">$89.00</span>
+                        <button class="buy-btn">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3: Luxury Beauty Set -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <span class="tag new">New</span>
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=400&q=80" alt="Beauty Products">
+                </div>
+                <div class="card-info">
+                    <h3>Glow Skin Care Kit</h3>
+                    <p>Organic face and skin serums for a radiant glow.</p>
+                    <div class="price-buy">
+                        <span class="price">$35.00</span>
+                        <button class="buy-btn">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: MALE, FEMALE, AND CHILDREN SUITS -->
+        <section id="clothing" class="section-title">
+            <h2>👔 Wardrobe & Clothing</h2>
+        </section>
+        <div class="grid">
+            <!-- Men's Attire -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1593030103066-0093718efeb9?auto=format&fit=crop&w=400&q=80" alt="Men Formal Suits">
+                </div>
+                <div class="card-info">
+                    <h3>Slim-Fit Formal Suit</h3>
+                    <p>Sharp men's suit with premium tie, pants, and belt details.</p>
+                    <div class="price-buy">
+                        <span class="price">$120.00</span>
+                        <button class="buy-btn">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Denim / Casual Jeans & T-Shirts -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=400&q=80" alt="Jeans & T-Shirts">
+                </div>
+                <div class="card-info">
+                    <h3>Urban Denim & Tee Combo</h3>
+                    <p>Classic rugged blue jeans paired with breathable cotton t-shirt.</p>
+                    <div class="price-buy">
+                        <span class="price">$55.00</span>
+                        <button class="buy-btn">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Children's Clothing -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&w=400&q=80" alt="Children Suits">
+                </div>
+                <div class="card-info">
+                    <h3>Kids Festive Suit Set</h3>
+                    <p>Colorful and comfortable traditional clothes for children.</p>
+                    <div class="price-buy">
+                        <span class="price">$29.99</span>
+                        <button class="buy-btn">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: FOOT, HAND, AND HEAD WEAR + BAGS -->
+        <section id="accessories" class="section-title">
+            <h2>👟 Footwear, Headwear & Bags</h2>
+        </section>
+        <div class="grid">
+            <!-- Footwear -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=400&q=80" alt="Shoes">
+                </div>
+                <div class="card-info">
+                    <h3>Classic Leather Loafers</h3>
+                    <p>Perfect footwear accompaniment for traditional or western suits.</p>
+                    <div class="price-buy">
+                        <span class="price">$65.00</span>
+                        <button class="buy-btn">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bags for Boys/Girls -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=400&q=80" alt="Backpacks">
+                </div>
+                <div class="card-info">
+                    <h3>Urban Canvas Backpack</h3>
+                    <p>Trendy unisex bag for boys and girls with spacious pockets.</p>
+                    <div class="price-buy">
+                        <span class="price">$40.00</span>
+                        <button class="buy-btn">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Head/Hand wear (Hats/Belts/Watches) -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1524383594020-c0b06a31983f?auto=format&fit=crop&w=400&q=80" alt="Headwear and Accessories">
+                </div>
+                <div class="card-info">
+                    <h3>Streetwear Cap & Belt Kit</h3>
+                    <p>A smart adjustment set featuring headwear and leather belts.</p>
+                    <div class="price-buy">
+                        <span class="price">$25.00</span>
+                        <button class="buy-btn">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: HOME & KITCHEN APPLIANCES -->
+        <section id="appliances" class="section-title">
+            <h2>🍳 Home & Kitchen Appliances</h2>
+        </section>
+        <div class="grid">
+            <!-- Kitchen Appliance -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=400&q=80" alt="Kitchen Appliance">
+                </div>
+                <div class="card-info">
+                    <h3>Retro Drip Coffee Maker</h3>
+                    <p>Brew your morning coffee in style with smart timer settings.</p>
+                    <div class="price-buy">
+                        <span class="price">$110.00</span>
+                        <button class="buy-btn">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Appliance -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=400&q=80" alt="Blender">
+                </div>
+                <div class="card-info">
+                    <h3>High-Speed Smart Blender</h3>
+                    <p>Effortlessly chop, blend, and puree kitchen ingredients.</p>
+                    <div class="price-buy">
+                        <span class="price">$79.99</span>
+                        <button class="buy-btn">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <!-- Verbatim file path added here as well for the footer stamp -->
+        <img src="Gemini_Generated_Image_fyxnm8fyxnm8fyxn.png" alt="Top Pickers" style="width: 50px; border-radius: 50%; border: 1px solid var(--accent-gold);">
+        <h3>TOP PICKERS</h3>
+        <p>© 2026 Top Pickers - Quality Selections. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
